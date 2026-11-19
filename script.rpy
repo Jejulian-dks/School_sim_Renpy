@@ -6,10 +6,7 @@
 define config.name = "Tahun Terakhir di Nusa Bangsa"
 define config.window_title = "Tahun Terakhir di Nusa Bangsa"
 
-# ------------------------------------------------------------
 # KARAKTER
-# ------------------------------------------------------------
-
 define p = Character("[player_name]", color="#c8e6ff")
 define adelia = Character("Adelia", color="#ffb7cb")
 define raka = Character("Raka", color="#ffc879")
@@ -17,11 +14,8 @@ define maya = Character("Bu Maya", color="#b8d9ff")
 define revan = Character("Kak Revan", color="#c8b8ff")
 define narator = Character(None)
 
-# ------------------------------------------------------------
-# LATAR SEMENTARA
-# Bisa diganti dengan gambar latar nanti.
-# ------------------------------------------------------------
-
+# LATAR SEMENTARA: warna polos agar game bisa dites tanpa aset gambar.
+# Nantinya, baris image ini bisa diganti dengan gambar latar buatanmu.
 image bg classroom = Solid("#a8bac8")
 image bg corridor = Solid("#8da5b8")
 image bg window = Solid("#8298a9")
@@ -33,10 +27,7 @@ image bg stage = Solid("#292b43")
 image bg graduation = Solid("#788b9c")
 image bg black = Solid("#101116")
 
-# ------------------------------------------------------------
 # STAT DAN FLAG
-# ------------------------------------------------------------
-
 default player_name = "Kamu"
 
 default prestasi = 0
@@ -59,12 +50,8 @@ default noticed_absences = False
 default joined_performance = False
 default applied_scholarship = False
 
-# ------------------------------------------------------------
 # HUD STAT
-# ------------------------------------------------------------
-
 screen stats_hud():
-
     frame:
         xalign 0.98
         yalign 0.02
@@ -73,18 +60,17 @@ screen stats_hud():
 
         vbox:
             spacing 5
-
             text "STATUS" size 18 color "#ffffff"
             text "Prestasi: [prestasi]" size 15 color "#b9d9ff"
             text "Pertemanan: [pertemanan]" size 15 color "#ffc9d9"
             text "Passion: [passion]" size 15 color "#d5c3ff"
+
 
 # ============================================================
 # PEMBUKAAN
 # ============================================================
 
 label start:
-
     $ player_name = renpy.input(
         "Siapa namamu?",
         default="Kamu",
@@ -121,7 +107,6 @@ label start:
 # ============================================================
 
 label chapter_1:
-
     scene bg corridor
     with fade
 
@@ -149,9 +134,7 @@ label chapter_1:
     narator "Ada beberapa tempat yang bisa kamu pilih."
 
     menu:
-
-        "Duduk di sebelah Adelia":
-
+        "Duduk di sebelah Adelia (Prestasi +1)":
             $ prestasi += 1
 
             narator "Seorang siswi dengan catatan pelajaran yang tersusun rapi menggeser tasnya."
@@ -168,8 +151,7 @@ label chapter_1:
 
             $ supported_adelia = True
 
-        "Duduk di sebelah Raka":
-
+        "Duduk di sebelah Raka (Pertemanan +1)":
             $ pertemanan += 1
 
             narator "Seorang siswa mengangkat tasnya dari kursi kosong."
@@ -186,8 +168,7 @@ label chapter_1:
 
             narator "Raka tertawa kecil. Suasana yang semula canggung terasa sedikit lebih santai."
 
-        "Duduk sendirian di dekat jendela":
-
+        "Duduk sendirian di dekat jendela (Passion +1)":
             $ passion += 1
 
             narator "Kamu memilih kursi kosong di dekat jendela."
@@ -226,7 +207,6 @@ label chapter_1:
 # ============================================================
 
 label chapter_2:
-
     scene bg schoolyard
     with fade
 
@@ -241,9 +221,7 @@ label chapter_2:
     maya "Kalian akan menghabiskan banyak waktu di sana, jadi pikirkan baik-baik."
 
     menu:
-
-        "Bergabung dengan Klub Olimpiade":
-
+        "Bergabung dengan Klub Olimpiade (Prestasi +2)":
             $ ekskul = "olimpiade"
             $ prestasi += 2
 
@@ -266,8 +244,7 @@ label chapter_2:
 
             narator "Sejak hari itu, Adelia menjadi salah satu orang yang paling sering kamu temui."
 
-        "Menjadi panitia OSIS":
-
+        "Menjadi panitia OSIS (Pertemanan +2)":
             $ ekskul = "osis"
             $ pertemanan += 2
 
@@ -290,8 +267,7 @@ label chapter_2:
 
             narator "Raka menjadi salah satu teman yang paling sering bekerja bersamamu."
 
-        "Bergabung dengan Klub Musik":
-
+        "Bergabung dengan Klub Musik (Passion +2)":
             $ ekskul = "musik"
             $ passion += 2
 
@@ -332,7 +308,6 @@ label chapter_2:
 # ============================================================
 
 label chapter_3:
-
     scene bg classroom
     with fade
 
@@ -343,29 +318,21 @@ label chapter_3:
     narator "Tugas menumpuk, kegiatan ekstrakurikuler semakin sibuk, dan kamu harus menentukan prioritas."
 
     if ekskul == "olimpiade":
-
         adelia "Jangan lupa, kita masih punya beberapa materi yang belum dibahas."
-
         adelia "Kalau kamu mau mengejar nilai tinggi, kita harus mulai belajar lebih awal."
 
     elif ekskul == "osis":
-
         raka "Aku baru selesai mengurus daftar perlengkapan acara."
-
         raka "Dan sekarang kita harus belajar buat UTS. Hidup memang penuh kejutan."
 
     elif ekskul == "musik":
-
         revan "Kamu sudah berkembang sejak pertama datang."
-
         revan "Tapi UTS juga penting. Jangan sampai latihan membuatmu melupakan sekolah."
 
     narator "Malam sebelum ujian, kamu harus menentukan cara menghabiskan waktumu."
 
     menu:
-
-        "Belajar sendiri sampai malam":
-
+        "Belajar sendiri sampai malam (Prestasi +2, Pertemanan -1)":
             $ prestasi += 2
             $ pertemanan -= 1
 
@@ -388,8 +355,7 @@ label chapter_3:
 
             narator "Kamu merasa lebih siap menghadapi ujian, meskipun malam itu kamu hampir tidak punya waktu untuk berbincang dengan teman-teman."
 
-        "Belajar kelompok bersama Raka":
-
+        "Belajar kelompok bersama Raka (Pertemanan +2)":
             $ pertemanan += 2
 
             scene bg library
@@ -423,8 +389,7 @@ label chapter_3:
 
             narator "Ia segera mengalihkan pembicaraan."
 
-        "Latihan band dan pasrah":
-
+        "Latihan band dan pasrah (Passion +2, Prestasi -1)":
             $ passion += 2
             $ prestasi -= 1
 
@@ -468,7 +433,6 @@ label chapter_3:
 # ============================================================
 
 label chapter_4:
-
     scene bg classroom
     with fade
 
@@ -479,7 +443,6 @@ label chapter_4:
     narator "Awalnya kamu mengira ia hanya sakit atau memiliki urusan pribadi. Namun, ketidakhadirannya semakin sering terjadi."
 
     if pertemanan >= 3:
-
         scene bg corridor
         with dissolve
 
@@ -501,7 +464,6 @@ label chapter_4:
         $ raka_secret = True
 
     else:
-
         narator "Kamu memutuskan mencari tahu dengan bertanya kepada Bu Maya."
 
         scene bg classroom
@@ -531,9 +493,7 @@ label chapter_4:
     narator "Kamu bisa memilih untuk membantunya, meminta bantuan guru, atau membiarkannya menyelesaikan masalah sendiri."
 
     menu:
-
-        "Membantu Raka secara diam-diam":
-
+        "Membantu Raka secara diam-diam (Pertemanan +2)":
             $ helped_raka = True
             $ pertemanan += 2
             $ raka_trust += 2
@@ -559,8 +519,7 @@ label chapter_4:
 
             narator "Kamu tidak bisa menyelesaikan masalah keluarganya, tetapi kamu bisa membantunya menghadapi sekolah."
 
-        "Melaporkan situasinya kepada Bu Maya":
-
+        "Melaporkan situasinya kepada Bu Maya (Prestasi +1)":
             $ reported_raka = True
             $ prestasi += 1
             $ raka_trust += 1
@@ -586,8 +545,7 @@ label chapter_4:
 
             raka "Terima kasih sudah peduli."
 
-        "Berpura-pura tidak mengetahui masalahnya":
-
+        "Berpura-pura tidak mengetahui masalahnya (Pertemanan -1)":
             $ ignored_raka = True
             $ pertemanan -= 1
 
@@ -612,7 +570,6 @@ label chapter_4:
 # ============================================================
 
 label chapter_5:
-
     scene bg classroom
     with fade
 
@@ -623,7 +580,6 @@ label chapter_5:
     narator "Suatu pagi, tiga kesempatan datang hampir bersamaan."
 
     if ekskul == "olimpiade":
-
         scene bg library
         with dissolve
 
@@ -636,7 +592,6 @@ label chapter_5:
         adelia "Ini kesempatan bagus untuk kita."
 
     elif ekskul == "osis":
-
         scene bg schoolyard
         with dissolve
 
@@ -649,7 +604,6 @@ label chapter_5:
         raka "Oke. Aku cuma berharap kita bisa menyelesaikan acara ini bersama."
 
     elif ekskul == "musik":
-
         scene bg musicroom
         with dissolve
 
@@ -673,9 +627,7 @@ label chapter_5:
     narator "Kamu harus memilih satu hal untuk diprioritaskan."
 
     menu:
-
-        "Mengikuti seleksi beasiswa bersama Adelia":
-
+        "Mengikuti seleksi beasiswa bersama Adelia (Prestasi +2)":
             $ prestasi += 2
             $ applied_scholarship = True
             $ supported_adelia = True
@@ -699,8 +651,7 @@ label chapter_5:
 
             narator "Namun, kamu juga menyadari bahwa ada beberapa hal lain yang harus kamu tunda."
 
-        "Mempersiapkan pentas seni bersama Kak Revan":
-
+        "Mempersiapkan pentas seni bersama Kak Revan (Passion +2)":
             $ passion += 2
             $ joined_performance = True
             $ supported_revan = True
@@ -722,8 +673,7 @@ label chapter_5:
 
             narator "Ada banyak hal yang harus dipelajari, tetapi kamu merasa semakin dekat dengan sesuatu yang ingin kamu lakukan."
 
-        "Mendampingi Raka":
-
+        "Mendampingi Raka (Pertemanan +2)":
             $ pertemanan += 2
             $ supported_friends = True
             $ raka_trust += 1
@@ -759,7 +709,6 @@ label chapter_5:
 # ============================================================
 
 label chapter_6:
-
     scene bg graduation
     with fade
 
@@ -774,48 +723,30 @@ label chapter_6:
     narator "Sekarang, kamu sudah sampai di penghujung perjalanan."
 
     if ekskul == "olimpiade":
-
         adelia "Kamu ingat waktu pertama kali datang ke kelas?"
-
         p "Aku ingat. Aku bahkan terlambat."
-
         adelia "Sekarang kita sudah hampir lulus."
-
         adelia "Aku masih ingin mendapatkan hasil terbaik, tetapi aku juga mulai memahami bahwa tidak semua hal bisa berjalan sesuai rencana."
-
         p "Kamu terdengar berbeda dari dulu."
-
         adelia "Mungkin karena tahun ini mengajarkanku banyak hal."
 
     elif ekskul == "osis":
-
         raka "Aneh, ya. Rasanya baru kemarin kita sibuk mengurus kegiatan sekolah."
-
         p "Dan sekarang semuanya hampir selesai."
-
         raka "Aku akan merindukan masa-masa ini."
-
         p "Termasuk rapat yang panjang?"
-
         raka "Jangan merusak momen ini."
-
         narator "Kalian tertawa, mengingat semua hal yang pernah terjadi."
 
     elif ekskul == "musik":
-
         scene bg musicroom
         with dissolve
 
         revan "Kamu sudah banyak berkembang sejak pertama datang."
-
         p "Aku masih punya banyak hal untuk dipelajari."
-
         revan "Semua musisi juga begitu."
-
         revan "Yang penting, kamu tahu apa yang ingin kamu lakukan berikutnya."
-
         p "Aku akan mencoba terus."
-
         revan "Kalau begitu, jangan berhenti hanya karena kamu belum tahu hasil akhirnya."
 
     scene bg graduation
@@ -824,39 +755,25 @@ label chapter_6:
     narator "Sebelum hari kelulusan, kamu kembali bertemu Raka."
 
     if helped_raka:
-
         raka "Aku ingin berterima kasih sekali lagi."
-
         raka "Kamu membantuku ketika semuanya terasa berat."
-
         p "Aku senang bisa membantu."
-
         raka "Aku belum bisa menyelesaikan semuanya, tapi sekarang aku merasa lebih siap."
-
         p "Kamu sudah berusaha sejauh ini. Teruskan saja."
 
     elif reported_raka:
-
         raka "Bu Maya sudah banyak membantuku mengatur tugas yang tertinggal."
-
         p "Syukurlah."
-
         raka "Terima kasih karena sudah peduli."
 
     elif ignored_raka:
-
         raka "Akhirnya kita sampai di penghujung tahun."
-
         p "Iya. Banyak hal yang terjadi."
-
         raka "Semoga setelah ini semuanya menjadi lebih baik."
 
     else:
-
         raka "Setahun ini terasa cepat sekali."
-
         p "Benar."
-
         raka "Aku senang kita bisa melewati semuanya."
 
     narator "Malam itu, kamu memikirkan semua keputusan yang telah kamu ambil."
@@ -875,31 +792,19 @@ label chapter_6:
 # ============================================================
 
 label determine_ending:
-
-    # Ending rahasia diperiksa terlebih dahulu.
-    # Selisih maksimal antara stat tertinggi dan terendah: 2.
-
     $ highest_stat = max(prestasi, pertemanan, passion)
     $ lowest_stat = min(prestasi, pertemanan, passion)
 
+    # Ending rahasia: membantu Raka dan semua stat seimbang.
     if helped_raka and (highest_stat - lowest_stat <= 2):
-
         jump ending_together
 
-    # Ending utama berdasarkan stat tertinggi.
-    # Jika ada nilai yang sama, urutan prioritas:
-    # Prestasi, lalu Pertemanan, lalu Passion.
-
+    # Jika seri, prioritas: Prestasi, lalu Pertemanan, lalu Passion.
     if prestasi >= pertemanan and prestasi >= passion:
-
         jump ending_juara
-
     elif pertemanan >= prestasi and pertemanan >= passion:
-
         jump ending_rumah
-
     else:
-
         jump ending_nada
 
 
@@ -908,7 +813,6 @@ label determine_ending:
 # ============================================================
 
 label ending_juara:
-
     scene bg library
     with fade
 
@@ -917,31 +821,19 @@ label ending_juara:
     narator "Hari pengumuman beasiswa akhirnya tiba."
 
     if applied_scholarship:
-
         narator "Kamu membuka pengumuman dengan tangan sedikit gemetar."
-
         narator "Namamu tercantum dalam daftar penerima beasiswa."
-
         p "Aku berhasil..."
-
     else:
-
         narator "Sepanjang tahun, kamu berusaha menjaga nilai dan meningkatkan kemampuan akademik."
-
         narator "Kamu belum mendapatkan semua kesempatan yang kamu inginkan, tetapi usahamu membuka jalan menuju masa depan."
-
         p "Setidaknya, aku tahu aku sudah berusaha."
 
     adelia "Selamat!"
-
     p "Terima kasih, Adelia."
-
     adelia "Aku tahu kamu sudah bekerja keras."
-
     adelia "Kita akhirnya bisa melangkah menuju masa depan."
-
     p "Iya. Aku harap kita tetap bisa saling mendukung."
-
     adelia "Tentu saja."
 
     narator "Kamu berhasil mendapatkan kesempatan untuk melanjutkan pendidikan ke kampus impianmu."
@@ -954,11 +846,8 @@ label ending_juara:
     with dissolve
 
     narator "Kamu tidak menyesali kerja kerasmu."
-
     narator "Kamu hanya berharap bisa menemukan keseimbangan yang lebih baik pada perjalanan berikutnya."
-
     narator "Masa depanmu terbuka lebar."
-
     narator "Dan kali ini, kamu tahu bahwa keberhasilan juga membutuhkan orang-orang yang berjalan bersamamu."
 
     jump game_credits
@@ -969,7 +858,6 @@ label ending_juara:
 # ============================================================
 
 label ending_rumah:
-
     scene bg schoolyard
     with fade
 
@@ -982,9 +870,7 @@ label ending_rumah:
     narator "Namun, ketika kamu tiba di sekolah, beberapa teman langsung memanggil namamu."
 
     raka "Hei! Akhirnya datang juga."
-
     p "Memangnya kalian sudah menunggu lama?"
-
     raka "Tentu saja. Kita harus mengambil foto bersama."
 
     narator "Satu per satu teman sekelas berkumpul."
@@ -992,17 +878,11 @@ label ending_rumah:
     narator "Di antara keramaian itu, kamu melihat Raka tersenyum dengan lebih tenang daripada sebelumnya."
 
     raka "Aku masih punya banyak masalah yang harus diselesaikan."
-
     raka "Tapi sekarang aku merasa bisa menghadapinya."
-
     p "Kamu pasti bisa."
-
     raka "Dan kalau aku butuh bantuan?"
-
     p "Kamu tahu harus mencari siapa."
-
     raka "Baiklah. Tapi jangan harap aku akan berhenti membuat lelucon."
-
     p "Aku sudah menduganya."
 
     narator "Kalian tertawa."
@@ -1010,7 +890,6 @@ label ending_rumah:
     narator "Adelia datang membawa beberapa foto kelas yang baru dicetak."
 
     adelia "Kalian harus ikut berfoto. Ini hari terakhir kita sebagai siswa di sini."
-
     p "Baik. Aku datang."
 
     narator "Kamu melihat orang-orang yang telah menemanimu selama setahun."
@@ -1033,7 +912,6 @@ label ending_rumah:
 # ============================================================
 
 label ending_nada:
-
     scene bg stage
     with fade
 
@@ -1044,13 +922,9 @@ label ending_nada:
     narator "Suara penonton memenuhi halaman sekolah."
 
     revan "Sudah siap?"
-
     p "Sejujurnya, tidak."
-
     revan "Bagus. Berarti kamu masih punya alasan untuk merasa gugup."
-
     p "Kak, itu tidak membantu."
-
     revan "Kalau begitu, anggap saja semua orang di depan sana datang untuk mendengarkanmu."
 
     narator "Kamu menarik napas panjang."
@@ -1062,7 +936,6 @@ label ending_nada:
     narator "Ketika lagu berakhir, tepuk tangan memenuhi halaman sekolah."
 
     p "Kita berhasil."
-
     revan "Kamu berhasil. Aku hanya membantu sedikit."
 
     narator "Beberapa hari kemudian, sebuah pesan masuk ke ponselmu."
@@ -1076,9 +949,7 @@ label ending_nada:
     narator "Kamu tahu kesempatan ini belum menjamin kesuksesan. Industri musik penuh persaingan, dan perjalananmu masih panjang."
 
     revan "Apa pun keputusanmu, jangan lupa alasan kamu mulai bermusik."
-
     p "Aku hanya ingin terus membuat musik."
-
     revan "Kalau begitu, teruslah belajar."
 
     scene bg graduation
@@ -1104,7 +975,6 @@ label ending_nada:
 # ============================================================
 
 label ending_together:
-
     scene bg stage
     with fade
 
@@ -1115,15 +985,10 @@ label ending_together:
     narator "Kamu berdiri di belakang panggung bersama anggota klub musik."
 
     revan "Kamu sudah siap?"
-
     p "Aku rasa begitu."
-
     revan "Bagus. Ada sesuatu yang perlu kamu tahu."
-
     p "Apa?"
-
     revan "Musik bukan hanya soal siapa yang paling hebat di atas panggung."
-
     revan "Kadang, yang membuat penampilan berarti adalah orang-orang yang berdiri bersamamu."
 
     narator "Kamu mengangguk."
@@ -1133,13 +998,9 @@ label ending_together:
     narator "Raka berdiri di dekatmu, sementara Adelia membantu mengatur bagian penampilan yang belum selesai."
 
     p "Kalian benar-benar ikut?"
-
     raka "Tentu saja. Masa kami membiarkanmu tampil sendirian?"
-
     adelia "Jangan salah mengira ini berarti aku akan berhenti mengejar prestasi."
-
     p "Aku tidak pernah berpikir begitu."
-
     adelia "Bagus. Sekarang fokus ke penampilanmu."
 
     narator "Kalian mulai bermain."
@@ -1156,15 +1017,10 @@ label ending_together:
     narator "Pada hari kelulusan, kamu kembali memandang sekolah yang telah menjadi bagian penting dari hidupmu."
 
     raka "Kita benar-benar sudah selesai, ya?"
-
     adelia "Setidaknya untuk urusan SMA."
-
     revan "Setelah ini, kalian semua punya jalan masing-masing."
-
     p "Tapi kita masih bisa bertemu lagi."
-
     raka "Tentu. Kita harus mengadakan reuni."
-
     adelia "Jangan membicarakan reuni sebelum kita benar-benar lulus."
 
     narator "Kalian tertawa bersama."
@@ -1189,33 +1045,25 @@ label ending_together:
 # ============================================================
 
 label game_credits:
-
     scene bg black
     with fade
 
     hide screen stats_hud
 
     narator "TAHUN TERAKHIR DI NUSA BANGSA"
-
     narator "Terima kasih sudah memainkan cerita ini."
-
     narator "Setiap pilihan membentuk perjalananmu."
-
     narator "Dan setiap perjalanan memiliki cerita yang berbeda."
 
     menu:
-
         "Mainkan lagi":
-
             jump restart_game
 
         "Keluar dari cerita":
-
             return
 
 
 label restart_game:
-
     $ prestasi = 0
     $ pertemanan = 0
     $ passion = 0
