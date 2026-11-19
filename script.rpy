@@ -15,7 +15,6 @@ define revan = Character("Kak Revan", color="#c8b8ff")
 define narator = Character(None)
 
 # LATAR SEMENTARA: warna polos agar game bisa dites tanpa aset gambar.
-# Nantinya, baris image ini bisa diganti dengan gambar latar buatanmu.
 image bg classroom = Solid("#a8bac8")
 image bg corridor = Solid("#8da5b8")
 image bg window = Solid("#8298a9")
@@ -26,6 +25,20 @@ image bg schoolyard = Solid("#9cabb1")
 image bg stage = Solid("#292b43")
 image bg graduation = Solid("#788b9c")
 image bg black = Solid("#101116")
+
+# GAMBAR ADELIA
+# PNG RGBA transparan, simpan di game/images/Adelia/
+image adelia neutral = "images/Adelia/Adelia_neutral.png"
+image adelia happy = "images/Adelia/Adelia_happy.png"
+image adelia sad = "images/Adelia/Adelia_sad.png"
+image adelia shock = "images/Adelia/Adelia_shock.png"
+
+# Posisi dan ukuran Adelia. Sesuaikan zoom jika terlalu besar/kecil.
+transform adelia_right:
+    xalign 0.98
+    yalign 1.0
+    zoom 0.62
+    yoffset 0
 
 # STAT DAN FLAG
 default player_name = "Kamu"
@@ -137,12 +150,16 @@ label chapter_1:
         "Duduk di sebelah Adelia (Prestasi +1)":
             $ prestasi += 1
 
+            show adelia neutral at adelia_right
+            with dissolve
+
             narator "Seorang siswi dengan catatan pelajaran yang tersusun rapi menggeser tasnya."
 
             adelia "Di sini masih kosong. Kamu bisa duduk."
 
             p "Terima kasih."
 
+            show adelia happy at adelia_right
             adelia "Kalau ada materi yang tertinggal, nanti aku bisa bantu. Tapi sebaiknya kamu segera mengejar pelajaran."
 
             p "Baik. Aku akan berusaha."
@@ -150,6 +167,7 @@ label chapter_1:
             adelia "Bagus. Kita punya banyak materi yang harus diselesaikan tahun ini."
 
             $ supported_adelia = True
+            hide adelia
 
         "Duduk di sebelah Raka (Pertemanan +1)":
             $ pertemanan += 1
@@ -228,12 +246,16 @@ label chapter_2:
             scene bg library
             with dissolve
 
+            show adelia neutral at adelia_right
+            with dissolve
+
             narator "Kamu memutuskan bergabung dengan Klub Olimpiade."
 
             adelia "Kamu juga mendaftar di sini?"
 
             p "Iya. Aku ingin meningkatkan kemampuan akademikku."
 
+            show adelia happy at adelia_right
             adelia "Kalau begitu, kita mungkin akan sering bertemu."
 
             adelia "Aku biasanya menyusun jadwal belajar setiap minggu. Kalau kamu mau, kita bisa bertukar catatan."
@@ -243,6 +265,8 @@ label chapter_2:
             adelia "Pastikan kamu konsisten. Hasil yang baik perlu usaha yang teratur."
 
             narator "Sejak hari itu, Adelia menjadi salah satu orang yang paling sering kamu temui."
+
+            hide adelia
 
         "Menjadi panitia OSIS (Pertemanan +2)":
             $ ekskul = "osis"
@@ -318,8 +342,12 @@ label chapter_3:
     narator "Tugas menumpuk, kegiatan ekstrakurikuler semakin sibuk, dan kamu harus menentukan prioritas."
 
     if ekskul == "olimpiade":
+        show adelia neutral at adelia_right
+        with dissolve
+
         adelia "Jangan lupa, kita masih punya beberapa materi yang belum dibahas."
         adelia "Kalau kamu mau mengejar nilai tinggi, kita harus mulai belajar lebih awal."
+        hide adelia
 
     elif ekskul == "osis":
         raka "Aku baru selesai mengurus daftar perlengkapan acara."
@@ -345,13 +373,14 @@ label chapter_3:
 
             narator "Pesan dari teman-temanmu terus berdatangan, tetapi kamu memilih menyelesaikan latihan soal."
 
+            show adelia neutral at adelia_right
+            with dissolve
             adelia "Kamu masih belajar?"
-
             p "Iya. Aku belum selesai."
-
+            show adelia sad at adelia_right
             adelia "Jangan lupa istirahat. Kamu tetap perlu menjaga kondisi saat ujian."
-
             p "Aku tahu. Terima kasih."
+            hide adelia
 
             narator "Kamu merasa lebih siap menghadapi ujian, meskipun malam itu kamu hampir tidak punya waktu untuk berbincang dengan teman-teman."
 
@@ -583,13 +612,19 @@ label chapter_5:
         scene bg library
         with dissolve
 
+        show adelia neutral at adelia_right
+        with dissolve
+
         adelia "Ada seleksi beasiswa yang akan dibuka minggu ini."
 
+        show adelia happy at adelia_right
         adelia "Aku ingin mendaftar. Kamu mau ikut?"
 
         p "Aku akan mempertimbangkannya."
 
         adelia "Ini kesempatan bagus untuk kita."
+
+        hide adelia
 
     elif ekskul == "osis":
         scene bg schoolyard
@@ -635,6 +670,9 @@ label chapter_5:
             scene bg library
             with dissolve
 
+            show adelia happy at adelia_right
+            with dissolve
+
             adelia "Kamu jadi ikut mendaftar!"
 
             p "Iya. Aku ingin mencoba kesempatan ini."
@@ -643,9 +681,12 @@ label chapter_5:
 
             p "Tapi aku mungkin tidak bisa membantu banyak untuk kegiatan lain."
 
+            show adelia neutral at adelia_right
             adelia "Aku mengerti. Kita semua sedang mengejar sesuatu."
 
             adelia "Yang penting, kita berusaha sebaik mungkin."
+
+            hide adelia
 
             narator "Kamu menghabiskan sebagian besar waktumu untuk mempersiapkan seleksi."
 
@@ -723,12 +764,18 @@ label chapter_6:
     narator "Sekarang, kamu sudah sampai di penghujung perjalanan."
 
     if ekskul == "olimpiade":
+        show adelia neutral at adelia_right
+        with dissolve
         adelia "Kamu ingat waktu pertama kali datang ke kelas?"
         p "Aku ingat. Aku bahkan terlambat."
+        show adelia happy at adelia_right
         adelia "Sekarang kita sudah hampir lulus."
+        show adelia sad at adelia_right
         adelia "Aku masih ingin mendapatkan hasil terbaik, tetapi aku juga mulai memahami bahwa tidak semua hal bisa berjalan sesuai rencana."
         p "Kamu terdengar berbeda dari dulu."
+        show adelia neutral at adelia_right
         adelia "Mungkin karena tahun ini mengajarkanku banyak hal."
+        hide adelia
 
     elif ekskul == "osis":
         raka "Aneh, ya. Rasanya baru kemarin kita sibuk mengurus kegiatan sekolah."
@@ -829,12 +876,15 @@ label ending_juara:
         narator "Kamu belum mendapatkan semua kesempatan yang kamu inginkan, tetapi usahamu membuka jalan menuju masa depan."
         p "Setidaknya, aku tahu aku sudah berusaha."
 
+    show adelia happy at adelia_right
+    with dissolve
     adelia "Selamat!"
     p "Terima kasih, Adelia."
     adelia "Aku tahu kamu sudah bekerja keras."
     adelia "Kita akhirnya bisa melangkah menuju masa depan."
     p "Iya. Aku harap kita tetap bisa saling mendukung."
     adelia "Tentu saja."
+    hide adelia
 
     narator "Kamu berhasil mendapatkan kesempatan untuk melanjutkan pendidikan ke kampus impianmu."
 
@@ -887,10 +937,11 @@ label ending_rumah:
 
     narator "Kalian tertawa."
 
-    narator "Adelia datang membawa beberapa foto kelas yang baru dicetak."
-
+    show adelia happy at adelia_right
+    with dissolve
     adelia "Kalian harus ikut berfoto. Ini hari terakhir kita sebagai siswa di sini."
     p "Baik. Aku datang."
+    hide adelia
 
     narator "Kamu melihat orang-orang yang telah menemanimu selama setahun."
 
@@ -997,11 +1048,15 @@ label ending_together:
 
     narator "Raka berdiri di dekatmu, sementara Adelia membantu mengatur bagian penampilan yang belum selesai."
 
+    show adelia happy at adelia_right
+    with dissolve
     p "Kalian benar-benar ikut?"
     raka "Tentu saja. Masa kami membiarkanmu tampil sendirian?"
     adelia "Jangan salah mengira ini berarti aku akan berhenti mengejar prestasi."
     p "Aku tidak pernah berpikir begitu."
+    show adelia neutral at adelia_right
     adelia "Bagus. Sekarang fokus ke penampilanmu."
+    hide adelia
 
     narator "Kalian mulai bermain."
 
@@ -1049,6 +1104,7 @@ label game_credits:
     with fade
 
     hide screen stats_hud
+    hide adelia
 
     narator "TAHUN TERAKHIR DI NUSA BANGSA"
     narator "Terima kasih sudah memainkan cerita ini."
